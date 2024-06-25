@@ -5,7 +5,7 @@
 <div class="container mt-5">
 
     @include('partials.session_message')
-    
+
     <div class="d-flex justify-content-around mt-5">
         <h1>I miei Progetti</h1>
         <form action="{{ route('admin.projects.index') }}" method="GET" class="d-flex align-items-center justify-content-center gap-3">
@@ -42,7 +42,13 @@
                 <td>{{$project->title}}</td>
                 <td>{{$project->type?->name}}</td>
                 <td>{{$project->slug}}</td>
-                <td>{{$project->used_technologies}}</td>
+                <td>@if ($project->technologies)
+                    @foreach ($project->technologies as $technology)
+                    {{ $technology->name }}
+                    @if (!$loop->last), @endif
+                    @endforeach
+                    @endif
+                </td>
                 <td>@if($project->status == 'ongoing')
                     <i class="fas fa-spinner fa-spin" title="In Progress"></i>
                     @elseif($project->status == 'completed')
@@ -52,18 +58,18 @@
                     @endif
                 </td>
                 <td class="d-flex gap-2">
-                    <a href="{{route('admin.projects.show', ['project'=>$project->slug]) }}" class="btn btn-outline-info"  title="Dettagli">
+                    <a href="{{route('admin.projects.show', ['project'=>$project->slug]) }}" class="btn btn-outline-info" title="Dettagli">
                         <i class="fa-solid fa-circle-info"></i>
                     </a>
                     <a href="{{route('admin.projects.edit', ['project'=>$project->slug]) }}" class="btn btn-outline-warning" title="Modifica">
-                        <i class="fa-solid fa-file-pen" ></i>
+                        <i class="fa-solid fa-file-pen"></i>
                     </a>
                     <form action="{{route('admin.projects.destroy', ['project'=>$project->slug]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-outline-danger" title="Elimina" onclick="return confirm('Sei sicuro di volerlo eliminare {{$project->title}}? ')"><i class="fa-solid fa-trash-can " ></i></button>
+                        <button class="btn btn-outline-danger" title="Elimina" onclick="return confirm('Sei sicuro di volerlo eliminare {{$project->title}}? ')"><i class="fa-solid fa-trash-can "></i></button>
 
-                    </form> 
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -73,7 +79,7 @@
         </tbody>
     </table>
     <div>
-    {{ $projects->appends(['status' => request('status')])->links() }}
+        {{ $projects->appends(['status' => request('status')])->links() }}
     </div>
 </div>
 
