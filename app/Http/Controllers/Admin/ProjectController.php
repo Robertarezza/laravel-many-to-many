@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\technology;
 use App\Models\Type;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,7 @@ class ProjectController extends Controller
     
         if ($status === 'all') {
             // Paginazione per tutti i progetti
-            $projects = Project::paginate(5);
+            $projects = Project::paginate(10);
         } else {
             // Paginazione per i progetti filtrati per stato
             $projects = Project::where('status', $status)->paginate(5);
@@ -39,8 +40,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $technologies = technology::all();
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -80,8 +82,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $technologies = technology::all();
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

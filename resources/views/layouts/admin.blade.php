@@ -24,8 +24,7 @@
 <body>
   <div id="app">
 
-    <header class="navbar navbar-dark bg-dark flex-md-nowrap p-2 shadow" 
-    style="
+    <header class="navbar navbar-dark bg-dark flex-md-nowrap p-2 shadow" style="
     position: fixed;
     top: 0;
     z-index: 1020;
@@ -87,13 +86,26 @@
                     </li>
                     <li>
                       <a class="nav-link text-white d-flex align-items-center gap-2" href="{{ route('admin.projects.trash') }}">
-                      <i class="fa-solid fa-trash-can " ></i>
+                        <i class="fa-solid fa-trash-can "></i>
                         <span class="flex-fill">Visualizza Cestino</span>
                       </a>
                     </li>
 
                   </ul>
+                </div>
               </li>
+
+              <li class="nav-item">
+              <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.types.index') }}">
+
+                  <span>
+                    <span>
+                    <i class="fa-solid fa-cube fa-fw me-2"></i>Tipologia
+                    </span>
+                  
+                </a>
+              </li>
+
             </ul>
 
 

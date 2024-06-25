@@ -78,7 +78,7 @@
 
         </tbody>
     </table>
-    <div>
+    <div class="mb-5">
         {{ $projects->appends(['status' => request('status')])->links() }}
     </div>
 </div>

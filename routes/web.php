@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::middleware('auth')
           Route::put('projects/restore/{project:slug}', [ProjectController::class, 'restore'])->name('projects.restore'); // Ripristina un elemento eliminato
           Route::delete('projects/force-delete/{project:slug}', [ProjectController::class, 'forceDelete'])->name('projects.force-delete'); // Elimina definitivamente un elemento
   
+        //rotte Type
+        Route::resource('projects/types', TypeController::class);
+
         Route::resource('projects', ProjectController::class)->
         parameters(['projects'=>'project:slug']);
 
