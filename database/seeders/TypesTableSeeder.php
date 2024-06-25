@@ -6,6 +6,7 @@ use Faker\Guesser\Name;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Type;
+use Illuminate\Support\Str;
 
 class TypesTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class TypesTableSeeder extends Seeder
         foreach ($types as $type) {
             $newTypes = new Type();
             $newTypes->name = $type;
+            $newTypes->slug = Str::slug($type);
             $newTypes->save();
         }
     }
