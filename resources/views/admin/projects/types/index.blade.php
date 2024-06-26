@@ -31,6 +31,9 @@
 
                 <td class="d-flex gap-2">
 
+                    <a href="{{route('admin.types.show', ['type' => $type->id]) }}" class="btn btn-outline-info" title="Dettagli">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
 
                     <form action="{{route('admin.types.destroy',  ['type' => $type->id] )}}" method="POST">
                         @csrf
