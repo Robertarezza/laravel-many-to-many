@@ -17,16 +17,25 @@
     </div>
 
     <div class="mb-3">
-      <label for="used_technologies" class="form-label">Tecnologie Usate</label>
-      <input type="text" class="form-control" id="used_technologies" name="used_technologies" value="{{ old('used_technologies') }}">
+      <h5>Seleziona le Tecnologie:</h5>
+      <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+        @foreach ($technologies as $technology )
+
+        <input type="checkbox" class="btn-check" id="technology-{{$technology->id}}" autocomplete="off" value="{{$technology->id}}" name="technologies[]">
+        <label class="btn btn-outline-primary" for="technology-{{$technology->id}}">{{$technology->name}} 1</label>
+
+        @endforeach
+
+      </div>
     </div>
 
     <div class="mb-3">
-      <label for="status" class="form-label">Tipologia</label>
+      <label for="status" class="form-label">Stato di Lavorazione</label>
       <select class="form-select" id="status" name="status">
         <option>Seleziona</option>
-        <option @selected(old('status') === 'ongoing') value="ongoing">In lavorazione</option>
-        <option @selected(old('status') === 'completed') value="completed">Completato</option>
+        <option @selected(old('status')==='ongoing' ) value="ongoing">In lavorazione</option>
+        <option @selected(old('status')==='completed' ) value="completed">Completato</option>
       </select>
     </div>
 
@@ -35,7 +44,7 @@
       <select class="form-select" id="type_id" name="type_id">
         <option>Seleziona</option>
         @foreach ($types as $type)
-          <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
+        <option @selected(old('type_id')==$type->id) value="{{ $type->id }}">{{ $type->name }}</option>
         @endforeach
       </select>
     </div>
