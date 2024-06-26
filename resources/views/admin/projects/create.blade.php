@@ -22,7 +22,7 @@
 
         @foreach ($technologies as $technology )
 
-        <input type="checkbox" class="btn-check" id="technology-{{$technology->id}}" autocomplete="off" value="{{$technology->id}}" name="technologies[]">
+        <input type="checkbox" class="btn-check" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]">
         <label class="btn btn-outline-primary" for="technology-{{$technology->id}}">{{$technology->name}} 1</label>
 
         @endforeach

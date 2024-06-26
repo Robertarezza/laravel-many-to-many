@@ -20,14 +20,17 @@
         </div>
 
         <div class="mb-3">
-        <label for="technologies" class="form-label">Tecnologie Usate</label>
-    <select class="form-select" id="technologies" name="technologies[]" multiple>
-        @foreach ($technologies as $technology)
-            <option value="{{ $technology->id }}" {{ $project->technologies->contains('id', $technology->id) ? 'selected' : '' }}>
-                {{ $technology->name }}
-            </option>
-        @endforeach
-    </select>
+            <h4>Tecnologie usate</h4>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                @foreach ($technologies as $technology )
+
+                <input @checked($project->technologies->contains($technology)) type="checkbox" class="btn-check" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]">
+                <label class="btn btn-outline-primary" for="technology-{{$technology->id}}">{{$technology->name}} 1</label>
+
+                @endforeach
+
+            </div>
         </div>
 
         <div class="mb-3">
@@ -49,7 +52,7 @@
             <select class="form-select" id="type_id" name="type_id">
                 <option>Seleziona</option>
                 @foreach ($types as $type )
-                <option @selected(old('type_id', $project->type?->id )  == $type->id) value="{{$type->id}}"> {{$type->name}}</option>
+                <option @selected(old('type_id', $project->type?->id ) == $type->id) value="{{$type->id}}"> {{$type->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -73,9 +76,9 @@
         <div>
             <h4>Preview dell'immagine</h4>
             @if ($project->cover_image)
-                <img id="cover_image_preview" src="{{ asset('storage/' . $project->cover_image) }}" alt="">
+            <img id="cover_image_preview" src="{{ asset('storage/' . $project->cover_image) }}" alt="">
             @else
-                <p>Nessuna immagine di copertina presente</p>
+            <p>Nessuna immagine di copertina presente</p>
             @endif
         </div>
 

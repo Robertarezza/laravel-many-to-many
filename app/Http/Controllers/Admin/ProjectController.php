@@ -66,6 +66,11 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Str::slug($request->title);
         $project->save();
+
+        if($request->has('technologies')) {
+
+            $project->technologies()->attach($request->technologies);
+        }
         return redirect()-> route('admin.projects.show', $project->slug);
     }
 
@@ -109,6 +114,8 @@ class ProjectController extends Controller
             $data['cover_image'] = $image_path;
         }
         $project->update($data);
+
+        $project->technologies()->sync($request->technologies);
         return redirect()->route('admin.projects.show', $project->slug)->with('message',  $project->title .  ' è stato modificato');
     }
 
@@ -123,7 +130,7 @@ class ProjectController extends Controller
             Storage::delete($project->cover_image);
         }
         
-        
+        $project->technologies()->detach();
         $project->delete();
         return redirect()->route('admin.projects.index')->with('message', $project->title . ' è stato eliminato');
     }
