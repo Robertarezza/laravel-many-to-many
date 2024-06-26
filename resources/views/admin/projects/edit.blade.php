@@ -25,10 +25,16 @@
 
                 @foreach ($technologies as $technology )
 
-                <input @checked($project->technologies->contains($technology)) type="checkbox" class="btn-check" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]">
-                <label class="btn btn-outline-primary" for="technology-{{$technology->id}}">{{$technology->name}} 1</label>
+                @if (old('technologies') !== null)
 
+                <input @checked (in_array ( $technology->id, old('technologies', [] ))) type="checkbox" class="btn-check" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]">
+                @else
+                <input @checked($project->technologies->contains($technology)) type="checkbox" class="btn-check" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]">
+                @endif
+
+                <label class="btn btn-outline-primary" for="technology-{{$technology->id}}">{{$technology->name}} 1</label>
                 @endforeach
+
 
             </div>
         </div>
