@@ -28,7 +28,7 @@ class ProjectController extends Controller
             $projects = Project::paginate(10);
         } else {
             // Paginazione per i progetti filtrati per stato
-            $projects = Project::where('status', $status)->paginate(5);
+            $projects = Project::where('status', $status)->paginate(10); //se c'è il where e non paginate devo usare get
         }
     
         return view('admin.projects.index', compact('projects'));

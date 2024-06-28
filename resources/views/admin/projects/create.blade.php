@@ -59,6 +59,7 @@
       <input class="form-control" type="file" id="cover_image" name="cover_image">
     </div>
 
+    
 
     <div class="d-flex justify-content-around mt-3 mb-3 align-content-center align-items-center">
       <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-secondary">Indietro</a>
